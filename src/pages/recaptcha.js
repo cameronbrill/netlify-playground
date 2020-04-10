@@ -16,7 +16,7 @@ export default function Contact() {
   const [state, setState] = React.useState({})
 
   const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+    setState({ [e.target.name]: e.target.value })
   }
 
   const handleRecaptcha = value => {
