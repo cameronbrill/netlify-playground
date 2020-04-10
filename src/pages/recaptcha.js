@@ -19,7 +19,7 @@ export default function Contact() {
     setState({ ...state, [e.target.name]: e.target.value })
   }
 
-  handleRecaptcha = value => {
+  const handleRecaptcha = value => {
     this.setState({ "g-recaptcha-response": value});
   }
 
@@ -76,7 +76,7 @@ export default function Contact() {
         <Recaptcha 
           ref="recaptcha"
           sitekey={RECAPTCHA_KEY}
-          onChange={this.handleRecaptcha}
+          onChange={handleRecaptcha}
         />
         <p>
           <button type="submit">Send</button>
