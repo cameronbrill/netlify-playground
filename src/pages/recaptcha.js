@@ -14,6 +14,7 @@ function encode(data) {
 
 export default function Contact() {
   const [state, setState] = React.useState({})
+  const recaptchaRef = React.createRef()
 
   const handleChange = (e) => {
     setState({ [e.target.name]: e.target.value })
@@ -74,7 +75,7 @@ export default function Contact() {
           </label>
         </p>
         <Recaptcha 
-          ref="recaptcha"
+          ref={recaptchaRef}
           sitekey={RECAPTCHA_KEY}
           onChange={handleRecaptcha}
         />
