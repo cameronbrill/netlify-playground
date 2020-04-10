@@ -1,7 +1,6 @@
 # example netlify.toml
 [build]
-  command = "yarn run build"
-  functions = "functions"
+  command = "echo SITE_RECAPTCHA_KEY=$SITE_RECAPTCHA_KEY >> .env.production && gatsby build"
   publish = "public"
 
 ## more info https://www.netlify.com/docs/netlify-toml-reference/
