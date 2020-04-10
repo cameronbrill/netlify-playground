@@ -1,17 +1,7 @@
 import React from 'react'
 import { navigate } from 'gatsby'
-import Recaptcha from 'react-google-recaptcha'
 import Layout from '../layout'
 
-const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY
-if (typeof RECAPTCHA_KEY === 'undefined') {
-  throw new Error(`
-  Env var GATSBY_APP_SITE_RECAPTCHA_KEY is undefined! 
-  You probably forget to set it in your Netlify build environment variables. 
-  Make sure to get a Recaptcha key at https://www.netlify.com/docs/form-handling/#custom-recaptcha-2-with-your-own-settings
-  Note this demo is specifically for Recaptcha v2
-  `)
-}
 
 function encode(data) {
   return Object.keys(data)
@@ -21,7 +11,6 @@ function encode(data) {
 
 export default function Contact() {
   const [state, setState] = React.useState({})
-  const recaptchaRef = React.createRef()
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -34,13 +23,11 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const form = e.target
-    const recaptchaValue = recaptchaRef.current.getValue()
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        'g-recaptcha-response': recaptchaValue,
         ...state,
       }),
     })
@@ -90,7 +77,7 @@ export default function Contact() {
             <input type="file" name="attachment" onChange={handleAttachment} />
           </label>
         </p>
-        <Recaptcha ref={recaptchaRef} sitekey={RECAPTCHA_KEY} />
+        <div data-netlify-recaptcha="true"></div>
         <p>
           <button type="submit">Send</button>
         </p>
