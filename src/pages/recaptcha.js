@@ -1,6 +1,9 @@
 import React from 'react'
 import { navigate } from 'gatsby'
 import Layout from '../layout'
+import Recaptcha from "react-google-recaptcha";
+
+const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
 
 
 function encode(data) {
@@ -16,8 +19,8 @@ export default function Contact() {
     setState({ ...state, [e.target.name]: e.target.value })
   }
 
-  const handleAttachment = (e) => {
-    setState({ ...state, [e.target.name]: e.target.files[0] })
+  handleRecaptcha = value => {
+    this.setState({ "g-recaptcha-response": value});
   }
 
   const handleSubmit = (e) => {
@@ -70,7 +73,11 @@ export default function Contact() {
             <textarea name="message" onChange={handleChange} />
           </label>
         </p>
-        <div data-netlify-recaptcha="true"></div>
+        <Recaptcha 
+          ref="recaptcha"
+          sitekey={RECAPTCHA_KEY}
+          onChange={this.handleRecaptcha}
+        />
         <p>
           <button type="submit">Send</button>
         </p>
