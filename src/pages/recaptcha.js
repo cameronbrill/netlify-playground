@@ -1,6 +1,7 @@
 import React from "react";
 import { navigateTo } from "gatsby-link";
 import Recaptcha from "react-google-recaptcha";
+import Layout from '../layout'
 
 const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
 
@@ -41,7 +42,7 @@ export default class Contact extends React.Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <h1>reCAPTCHA 2</h1>
         <form
           name="contact-recaptcha"
@@ -81,7 +82,7 @@ export default class Contact extends React.Component {
             <button type="submit">Send</button>
           </p>
         </form>
-      </div>
+      </Layout>
     );
   }
 }
